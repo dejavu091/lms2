@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact page {% endblock title %}
+
+{% block main %}
+    <h1>Welcome to the Contact Page</h1>
+    <p>This is the contact page of our website.</p>
+    <form action="">
+        <label for="name">name</label>
+        <input type="text" id="name" placeholder="full name"><br>
+        <label for="email">email</label>
+        <input type="email" id="email" placeholder="enter your email"><br>
+        <label for="message">message</label><br>
+        <textarea name="text area" id="message" cols="20" rows="10" placeholder="enter your message"></textarea>
+
+
+    </form>
+    {% include 'testimonies.html' %}
+{% endblock main %}
