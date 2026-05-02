@@ -8,6 +8,15 @@
 <body>
  {% include 'header.html' %}
     <main>
+        <div class="msg">
+            {% for msg in messages%} 
+                <p>
+                    {{ msg }}
+                </p>
+            
+            
+            {% endfor %}
+        </div>
         {% block main %} {% endblock main %}
     </main>
  {% include 'footer.html' %}
