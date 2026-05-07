@@ -1,3 +1,17 @@
 from django.db import models
+import uuid
+class contactMessage(models.Model):
+    # id= models.UUIDField(default=uuid.uuid4, primary_key=True,editable=False)
 
-# Create your models here.
+    name = models.CharField(max_length=250)
+    email = models.EmailField()
+    message = models.TextField()
+    attended_to = models.BooleanField(default=False)
+
+
+
+
+
+
+
+
