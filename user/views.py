@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,resolve_url
 from django.contrib import messages
 from django.views import View
+from user.models import contactMessage
 
 def homepage(request):
     print(request.method)
@@ -30,15 +31,19 @@ class Contact(View):
           name =request.POST.get('name')
           email =request.POST.get('email')
           comment =request.POST.get('comment')
+          # password=request.POST.get('password')
           if not name or not email or not comment:
                messages.error (request,'all field are required')
                return render(request,'contact.html')
           if len(name)<2:
                messages.error(request,'name too short')
                return render(request,'contact.html')
-         
-         
-         
+          if len(name)>250:
+               messages.error(request,'name too long')
+               return render(request,'contact.html')
+          contactMessage.objects.create(name=name, email=email,message=comment)
+          
+          
           messages.success(request,'welcome')
           return redirect(homepage)
                
