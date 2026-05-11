@@ -2,11 +2,15 @@ from django.shortcuts import render,redirect,resolve_url
 from django.contrib import messages
 from django.views import View
 from user.models import contactMessage
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def homepage(request):
     print(request.method)
     return render(request, 'home.html')
 
+@login_required
 def aboutpage(request):
     return render(request, 'about.html')
 # def contactpage(request):

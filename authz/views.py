@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,resolve_url
 from django.contrib import messages
 from django.views import View
 from django.contrib.auth.models import User
+from django.contrib.auth import login,logout,authenticate
 class Signup(View):
     def get(self,request):
         return render(request,'signup.html')
@@ -25,7 +26,7 @@ class Signup(View):
         username = username.lower()
         email = email.lower()
         if User.objects.filter(username=username).exists():
-            messages.error(request,'username alredy exist')
+            messages.error(request,'username already exist')
             return render(request,'signup.html')
         if User.objects.filter(email=email).exists():
             messages.error(request,'email already taken')
@@ -39,6 +40,36 @@ class Signup(View):
         messages.success(request,'account created successfully')
 
         return redirect(resolve_url('home'))
+    
+class loginView(View):
+    def get(self,request):
+         return render (request,'login.html')
+    def post(self,request): 
+        next_page=request.GET.get('next') 
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        if not username or not password:
+            messages.error(request,'all fields required')
+            return render(request,'login.html')
+        username=username.lower()
+        username_exist=User.objects.filter(username=username).first()
+        if not username_exist:
+            messages.error(request,'invalid login credentials')
+            return render(request,'login.html')
+        user= authenticate(username=username, password=password)
+        if not user:
+            messages.error(request,'invalid login credentials')
+            return render(request,'login.html')
+        login(request,user)
+        messages.success(request,'login successful')
+        return redirect(next_page or resolve_url('home'))
+
+def logoutView(request):
+    logout(request)
+    return redirect(resolve_url('login'))
+            
+            
+            
 
     
 # Create your views here.

@@ -2,10 +2,17 @@
         <hr>
         <nav>
             <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li> <a href="{%url 'signup'%}"> Sign up</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{%url 'logout'%}">log out</a></li>
+                     {% else %}
+                     <li> <a href="{%url 'signup'%}"> Sign up</a></li>
+                     <li><a href="{%url 'login'%}">Log in</a></li>
+
+                     {% endif %}
+
             </ul>
         </nav>
         <hr>

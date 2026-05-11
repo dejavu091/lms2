@@ -21,5 +21,6 @@ urlpatterns = [
     path('dejavu/', admin.site.urls),
     path('', include('user.urls')),
     path('authz/',include('authz.urls')),
+    path('product/',include('product.urls'))
 ]
  

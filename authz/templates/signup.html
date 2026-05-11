@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} sign up {% endblock title %}
-
+  {% block style %} {% endblock style%}
 {% for msg in messages%}
 <p>{{msg}}</p>
 {% endfor %}
@@ -24,6 +25,7 @@
 
 
 </form>
+<p> Already have an account? click here <a href="{%url 'login'%}"> login here</a></p>
 
 {% endblock main %}
 

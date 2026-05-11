@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %} Home page {% endblock title %}
+ {% block style %} {% endblock style%}
 
 {% block main %}
+
     <h1>Welcome to the Home Page</h1>
     <p>This is the home page of our website.</p>
+    <img src="{% static 'assets/zen-logo.svg' %}" alt="">
+<img src="{% static 'assets/love1.jpeg' %}" alt="">
 
 
     {% include 'testimonies.html' %}

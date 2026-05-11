@@ -1,0 +1,11 @@
+h1{
+    color: red;
+}
+body{
+    background-color: green;
+}
+footer{text-align: center;
+    padding: 3%;
+    color: white;
+    background-color: black;
+}
