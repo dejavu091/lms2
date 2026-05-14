@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from user.views import homepage
 
 
 
@@ -42,6 +43,57 @@ class Addproduct(LoginRequiredMixin,View):
         messages.success(request,'product listed successfully')
         return redirect(resolve_url('add-product'))
             
+class EditProduct(LoginRequiredMixin,View):
+     def get(self,request,product_id):
+          product=Product.objects.filter(id=product_id).first()
+          if not product:
+               return redirect(resolve_url(Products))
+          if product.user !=request.user:
+               return redirect(resolve_url(Products))
+          context={'product':product}
+          return render(request,'edit_products.html',context)
+     def post (self,request,product_id):
+          product=Product.objects.filter(id=product_id).first()
+          if not product:
+               return redirect(resolve_url(Products))
+          if product.user !=request.user:
+               return redirect(resolve_url(Products))
+          name=request.POST.get('name')
+          description=request.POST.get('description')
+          price=request.POST.get('price')
+          if price and price< 1:
+               messages.error(request,'price too low')
+          quantity=request.POST.get('quantity')
+          if quantity and quantity < 1:
+               messages.error(request,'quantitiy too low')
+          image=request.FILES.get('image')
+          product.name=name or product.name
+          product.description=description or product.description
+          product.price=price or product.price
+          product.quantity=quantity or product.quantity
+          product.image=image or product.image
+          product.save()
+          messages.success(request,'product successfully updated')
+          return redirect(resolve_url('products'))
+     
+
+
+@login_required    
+def delete_product(request,product_id):
+     product=Product.objects.filter(id=product_id).first()
+     if not product:
+          return redirect(resolve_url('products'))
+     if product.user != request.user:
+          return redirect(resolve_url('products'))
+     product.delete()
+     messages.success(request,'product deleted successfully')
+     return redirect(resolve_url('products'))
+          
+               
+     
+    
+          
+
 
 
 
