@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Products listing page {% endblock title %}
+
+{% block style %} <link rel="stylesheet" href="{% static 'user/css/product.css'%}">
+    {% endblock style%}
+{%block main %}
+<h1> All available products</h1>
+
+<div class="all-products">
+{% for product in all_prod %}
+<div class="product-card">
+    <img src="{{product.image.url}}" alt="{{ product.name }}">
+    <h3>Name: {{ product.name }}</h3>
+    <p>Description:{{ product.description }}</p>
+    <p>Quantity Available: {{ product.quantity }}</p>
+    <p>Listed by: {{product.user.username}}</p>
+    {% if product.user == user %}
+    <button class="buy-btn">Edit</button>
+    {% else %}
+    <button class="buy-btn">Buy</button>
+    {% endif %}
+</div>
+{% endfor %}
+</div>
+<a href="{%url 'add-product'%}"><button id="upload">upload a product</button></a>
+
+
+
+
+{% endblock main%}

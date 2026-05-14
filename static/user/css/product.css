@@ -1,0 +1,42 @@
+.all-products{display: grid;
+    row-gap: 30px;
+grid-template-columns: repeat(3,1fr);
+padding: 3%;}
+
+.product-card{
+    padding: 3%;
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 300px;
+    height: 500px;text-align: center;
+    scale: .9;
+}
+.product-card:hover{
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
+}
+
+.product-card img{
+    width: 100%;height: 50%;
+}
+#upload{
+    padding: 2%;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 2%;
+}
+body{
+    background-color: aquamarine;
+}
+.buy-btn{
+    padding: 3%;
+    cursor: pointer;
+    border: none;
+    background-color: burlywood;color: white;
+border-radius: 5px;
+}
+.buy-btn:hover{
+    background-color: greenyellow;
+}
