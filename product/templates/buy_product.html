@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}buy product {% endblock title %}
+{% block main%}
+<form action="" method="post">
+{% csrf_token %}
+<label for="quantity">Quantity</label>
+<input type="number" name="quantity" id="quantity"><br>
+<button>buy now</button>
+
+
+
+
+
+
+</form>
+
+
+
+{% endblock main %}

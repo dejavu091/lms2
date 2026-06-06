@@ -9,3 +9,9 @@ class contactMessage(models.Model):
     attended_to = models.BooleanField(default=False)
     def __str__(self):
         return f' Name= {self.name} Email= {self.email}'
+
+
+
+
+
+
